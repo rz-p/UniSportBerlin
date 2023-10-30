@@ -1,5 +1,5 @@
 import express from "express"
-import clickRoute from './routes/click'
+/* import clickRoute from './routes/click' */
 import homeRoute from './routes/home'
 
 const PORT = 4000
@@ -11,7 +11,7 @@ app.use(express.static('public'))
 app.use(express.json())
 
 app.use('/', homeRoute);
-app.use('/clicks', clickRoute)
+/* app.use('/clicks', clickRoute) */
 
 app.use((req, res, next) => {
   res.header('Access-Control-Allow-Origin', '*')

@@ -10,3 +10,24 @@ datasource db {
   url      = "file:./UniSport.db"
 }
 
+model User {
+  id String @id @default(cuid())
+  name String
+  email String @unique
+  sports Sport[]
+}
+
+model Sport {
+  id String @id @default(cuid())
+  name String
+  schedule String
+  university University[] @relation(fields: [universityId], references: [id])
+  universityId String
+  participants User[]
+}
+
+model University {
+  id String @id @default(cuid())
+  name String
+  sports Sport[]
+}

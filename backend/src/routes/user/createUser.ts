@@ -12,6 +12,8 @@ async function createUser(name: string, email: string) {
   console.log(user)
 }
 
-/* createUser(name, email).catch(console.error).finally(() => prisma.$disconnect()) */
+/* createUser(name, email)
+    .catch(console.error)
+    .finally(() => prisma.$disconnect()) */
 
 export default createUser

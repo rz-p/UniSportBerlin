@@ -6,7 +6,7 @@ import { Route, Routes } from "react-router-dom";
  return (
    <div>
      <Routes>
-       <Route exact path="/" element={<RecordList />} />
+       <Route exact path="/" element={<UserList />} />
      </Routes>
    </div>
  );

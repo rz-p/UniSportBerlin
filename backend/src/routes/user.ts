@@ -11,12 +11,12 @@ userRoutes.route("/new").get(function (req, res) {
     res.json(newUser)
 });
  
-userRoutes.route("/user/all").get(function (req, res) {
+userRoutes.route("/all").get(function (req, res) {
     const allUsers = findAllUser()
     res.json(allUsers)
 });
  
-userRoutes.route("user/delete/:id").delete((req, res) => {
+userRoutes.route("/delete/:id").delete((req, res) => {
     const { id } = req.params;
     const deletedUser = deleteUser(id)
     res.json(deletedUser)

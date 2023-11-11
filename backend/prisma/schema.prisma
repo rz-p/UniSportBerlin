@@ -15,7 +15,9 @@ model Sport {
   slug           String  @unique
   name           String
   location       String
-  participants   User?   @relation(fields: [participantsId], references: [id])
+  details        String
+  schedule       String
+  participants   User?   @relation(fields: [participantsId], references: [id], onDelete: Cascade, onUpdate: Cascade)
   participantsId String? @db.ObjectId
 }
 

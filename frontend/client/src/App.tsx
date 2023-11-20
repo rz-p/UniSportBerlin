@@ -1,14 +1,16 @@
 import React from "react";
-import { Route, Routes } from "react-router-dom";
-
+import { Route, Routes, BrowserRouter } from "react-router-dom";
+import UserList from "./components/userList";
 
  const App = () => {
  return (
    <div>
-     <Routes>
-       <Route exact path="/" element={<UserList />} />
-     </Routes>
+      <BrowserRouter>
+        <Routes>
+          <Route path="/" element={<UserList />} />
+        </Routes>
+      </BrowserRouter>
    </div>
  );
 };
- export default App;
+ export default App; 

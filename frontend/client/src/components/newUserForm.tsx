@@ -1,19 +1,26 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router";
+
 export default function Create() {
+
   const [form, setForm] = useState({
     name: "",
     email: "",
+    level: "",
+    position: "",
   });
+
   const navigate = useNavigate();
   // These methods will update the state properties.
-  function updateForm(value) {
+
+  function updateForm(value: any) {
     return setForm((prev) => {
       return { ...prev, ...value };
     });
   }
+
   // This function will handle the submission.
-  async function onSubmit(e) {
+  async function onSubmit(e: any) {
     e.preventDefault();
     // When a post request is sent to the create url, we'll add a new record to the database.
     const newPerson = { ...form };
@@ -27,7 +34,7 @@ export default function Create() {
       window.alert(error);
       return;
     });
-    setForm({ name: "", position: "", level: "" });
+    setForm({ name: "", email: "", level: "", position: "" });
     navigate("/");
   }
   // This following section will display the form that takes the input from the user.

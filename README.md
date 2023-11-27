@@ -7,7 +7,7 @@ This a web app that provides a list of sports courses available at various unive
 
 App name: UniSportBerlin
 
-DB: SQLite
+DB: MongoDB
 
 Item category: sport course
 

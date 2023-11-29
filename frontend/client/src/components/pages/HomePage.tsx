@@ -1,9 +1,11 @@
 import React from "react";
+import NavBar from "../NavBar";
+import { Button } from "@mui/material";
 
 const HomePage = () => {
     return (
         <div>
-        <h1>Home Page</h1>
+            <NavBar/>
         </div>
     );
     }

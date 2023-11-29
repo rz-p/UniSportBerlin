@@ -1,10 +1,9 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
-import App from './App';
-import Layout from './components/Layout';
 import { BrowserRouter } from 'react-router-dom';
 import HomePage from './components/pages/HomePage';
+import { ThemeProvider } from '@mui/material/styles';
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
@@ -12,9 +11,7 @@ const root = ReactDOM.createRoot(
 root.render(
   <React.StrictMode>
     <BrowserRouter>
-      <Layout>
         <HomePage/>
-      </Layout>
     </BrowserRouter>
   </React.StrictMode>
 );

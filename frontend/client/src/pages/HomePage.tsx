@@ -54,14 +54,12 @@ export default function HomePage() {
               <Typography gutterBottom variant="h5" component="div">
                 {sport.name}
               </Typography>
-              <CardContent sx={{ height: 10 }}>
-                <Typography variant="subtitle2" color="text.secondary">
-                  {sport.location}
-                </Typography>
-                <Typography variant="subtitle2" color="text.secondary">
-                  {sport.schedule}
-                </Typography>
-              </CardContent>
+              <Typography variant="subtitle2" color="text.secondary">
+                {sport.location}
+              </Typography>
+              <Typography variant="subtitle2" color="text.secondary">
+                {sport.schedule}
+              </Typography>
               <Typography variant="body2" color="text.secondary">
                 {sport.details}
               </Typography>

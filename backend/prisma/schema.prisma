@@ -17,7 +17,7 @@ model Sport {
   location         String
   details          String
   schedule         String
-  image            String
+  image            String?
   participants     User?   @relation(fields: [participantsId], references: [id], onDelete: Cascade, onUpdate: Cascade)
   participantsId   String? @db.ObjectId
   participantCount Int

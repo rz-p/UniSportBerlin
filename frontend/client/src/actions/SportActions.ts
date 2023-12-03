@@ -2,21 +2,20 @@ const coreUrl = "http://localhost:4000";
 
 const getAllSports = async () => {
   try {
-    const response = await fetch(`${coreUrl}/sports`, {
+    const response = await fetch(`${coreUrl}/sports/all`, {
       method: 'GET',
-      mode: 'no-cors',
+      mode: 'cors',
       headers: {
         'Content-Type': 'application/json'
       }
     });
 
     if (!response.ok) {
-      throw new Error(`An error occurred: ${response.statusText}`);
+      throw new Error(`An error occurred: ${response.statusText}`)
     }
 
-    const data = await response.json();
-    console.log(data);
-    return data;
+    const data = await response.json()
+    return data
   } catch (error) {
     console.error(error);
   }

@@ -3,10 +3,10 @@ import findAllSports from './sport/findAllSport'
 import createSport from './sport/createSport'
 import deleteSport from './sport/deleteSport'
 
-const userRouter = express.Router()
+const sportRouter = express.Router()
 
-userRouter.use('/', findAllSports)
-userRouter.use('/new', createSport)
-userRouter.use('/delete', deleteSport)
+sportRouter.use('/all', findAllSports)
+sportRouter.use('/new', createSport)
+sportRouter.use('/delete', deleteSport)
 
-export default userRouter;
+export default sportRouter;

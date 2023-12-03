@@ -5,7 +5,7 @@ const prisma = new PrismaClient()
 const router = express.Router()
 
 router.post('/', async (req, res) => {
-  const {slug, name, location, descriptionText, schedule} = req.body;
+  const {slug, name, location, descriptionText, schedule, image} = req.body;
   try {
     const sport = await prisma.sport.create({
       data: {
@@ -14,7 +14,9 @@ router.post('/', async (req, res) => {
         location: location,
         details: descriptionText,
         schedule: schedule,
-        participants: {}
+        image: image,
+        participants: {},
+        participantCount: 0,
       }
     })
     res.json(sport)

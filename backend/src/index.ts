@@ -1,7 +1,7 @@
 
 import express from 'express'
 import cors from 'cors'
-import userRoutes from './routes/sportsRouter'
+import sportRoutes from './routes/sportsRouter'
 
 const router = express.Router()
 const app = express()
@@ -12,7 +12,7 @@ app.get('/', (req, res) => {
     res.send('Hello World!')
   })
 
-app.use('/user', userRoutes)
+app.use('/sports', sportRoutes)
   
 app.listen(port, () => {
     console.log(`Express is listening at http://localhost:${port}`)

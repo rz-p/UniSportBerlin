@@ -51,7 +51,7 @@ export default function HomePage() {
                 Image Not Available
               </div>
             )}
-            <CardContent sx={{ height: 150 }}>
+            <CardContent sx={{ height: 200 }}>
               <Typography gutterBottom variant="h5" component="div">
                 {sport.name}
               </Typography>
@@ -65,10 +65,8 @@ export default function HomePage() {
                 {sport.details}
               </Typography>
             </CardContent>
-          </CardActionArea>
-          <CardActions disableSpacing>
             <LikeCounter />
-          </CardActions>
+          </CardActionArea>
         </Card>
       ))}
     </div>

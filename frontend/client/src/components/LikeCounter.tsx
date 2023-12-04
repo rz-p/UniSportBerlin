@@ -1,6 +1,6 @@
 import { FavoriteBorder, Favorite } from "@mui/icons-material";
 import Typography from "@mui/material/Typography";
-import { Checkbox } from "@mui/material";
+import { CardActionArea, Checkbox } from "@mui/material";
 import React from "react";
 
 export default function LikeCounter() {
@@ -25,15 +25,13 @@ export default function LikeCounter() {
   }
 
   return (
-    <div>
+    <CardActionArea>
       <Checkbox
         icon={<FavoriteBorder />}
         checkedIcon={<Favorite />}
         onChange={(event) => handleCheckboxChange(event)}
       />
-      <Typography variant="body2" color="text.secondary">
-        {like}
-      </Typography>
-    </div>
+      {like}
+    </CardActionArea>
   );
 }

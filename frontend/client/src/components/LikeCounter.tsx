@@ -1,35 +1,25 @@
 import { FavoriteBorder, Favorite } from "@mui/icons-material";
-import Typography from "@mui/material/Typography";
 import { CardActionArea, Checkbox } from "@mui/material";
-import React from "react";
+import React, { useEffect } from "react";
 
 export default function LikeCounter() {
   const [like, setLike] = React.useState(0);
   const [clicked, setClicked] = React.useState(false);
 
-  const handleCheckboxChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setClicked(event.target.checked);
-    if (clicked === false) {
-      handleNewLike();
+  useEffect(() => {
+    if (clicked) {
+      setLike((prevLike) => prevLike + 1);
     } else {
-      handleDislike();
+      setLike((prevLike) => Math.max(prevLike - 1, 0));
     }
-  };
-
-  function handleNewLike() {
-    setLike(like + 1);
-  }
-
-  function handleDislike() {
-    setLike(like - 1);
-  }
+  }, [clicked]);
 
   return (
     <CardActionArea>
       <Checkbox
         icon={<FavoriteBorder />}
         checkedIcon={<Favorite />}
-        onChange={(event) => handleCheckboxChange(event)}
+        onChange={(event) => setClicked(event.target.checked)}
       />
       {like}
     </CardActionArea>

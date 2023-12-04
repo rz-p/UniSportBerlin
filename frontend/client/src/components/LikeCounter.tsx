@@ -7,14 +7,14 @@ export default function LikeCounter() {
   const [like, setLike] = React.useState(0);
   const [clicked, setClicked] = React.useState(false);
 
-/*   const handleCheckboxChange = (event) => {
+  const handleCheckboxChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setClicked(event.target.checked);
-    if (event.target.checked) {
+    if (clicked === false) {
       handleNewLike();
     } else {
       handleDislike();
     }
-  }; */
+  };
 
   function handleNewLike() {
     setLike(like + 1);
@@ -29,7 +29,7 @@ export default function LikeCounter() {
       <Checkbox
         icon={<FavoriteBorder />}
         checkedIcon={<Favorite />}
-        onChange={() => handleNewLike()}
+        onChange={(event) => handleCheckboxChange(event)}
       />
       <Typography variant="body2" color="text.secondary">
         {like}

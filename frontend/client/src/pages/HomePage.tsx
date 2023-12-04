@@ -3,18 +3,14 @@ import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
 import CardMedia from "@mui/material/CardMedia";
 import Typography from "@mui/material/Typography";
-import { CardActionArea, CardActions, IconButton } from "@mui/material";
-import Checkbox from "@mui/material/Checkbox";
-import FavoriteBorder from "@mui/icons-material/FavoriteBorder";
-import Favorite from "@mui/icons-material/Favorite";
+import { CardActionArea } from "@mui/material";
 import { Sport } from "../common/types";
-import { getAllSports, addLike, dislike } from "../actions/SportActions";
+import { getAllSports } from "../actions/SportActions";
 import LikeCounter from "../components/LikeCounter";
 
 const label = { inputProps: { "aria-label": "Checkbox demo" } };
 
 export default function HomePage() {
-  const [likes, setLikes] = useState(0);
   const [sports, setSports] = useState<Sport[]>([]);
 
   useEffect(() => {

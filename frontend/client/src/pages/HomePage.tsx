@@ -9,6 +9,7 @@ import FavoriteBorder from "@mui/icons-material/FavoriteBorder";
 import Favorite from "@mui/icons-material/Favorite";
 import { Sport } from "../common/types";
 import { getAllSports, addLike, dislike } from "../actions/SportActions";
+import LikeCounter from "../components/LikeCounter";
 
 const label = { inputProps: { "aria-label": "Checkbox demo" } };
 
@@ -50,7 +51,7 @@ export default function HomePage() {
                 Image Not Available
               </div>
             )}
-            <CardContent sx={{ height: 150 }}>
+            <CardContent sx={{ height: 200 }}>
               <Typography gutterBottom variant="h5" component="div">
                 {sport.name}
               </Typography>
@@ -64,18 +65,8 @@ export default function HomePage() {
                 {sport.details}
               </Typography>
             </CardContent>
+            <LikeCounter />
           </CardActionArea>
-          <CardActions disableSpacing>
-            <Checkbox
-              {...label}
-              icon={<FavoriteBorder />}
-              checkedIcon={<Favorite />}
-              onChange={() => setLikes(likes + 1)}
-            />
-            <Typography variant="body2" color="text.secondary">
-              {likes}
-            </Typography>
-          </CardActions>
         </Card>
       ))}
     </div>

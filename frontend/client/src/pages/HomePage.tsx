@@ -47,7 +47,7 @@ export default function HomePage() {
                 Image Not Available
               </div>
             )}
-            <CardContent sx={{ height: 200 }}>
+            <CardContent>
               <Typography gutterBottom variant="h5" component="div">
                 {sport.name}
               </Typography>

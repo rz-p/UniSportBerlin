@@ -19,7 +19,51 @@ const getAllSports = async () => {
   } catch (error) {
     console.error(error);
   }
-};
+}
+
+const updateSport = async (slug: string) => {
+  try {
+    const response = await fetch(`${coreUrl}/sports/${slug}/update`, {
+      method: 'PUT',
+      mode: 'cors',
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    });
+
+    if (!response.ok) {
+      throw new Error(`An error occurred: ${response.statusText}`)
+    }
+
+    const data = await response.json()
+    return data
+  } catch (error) {
+    console.error(error);
+  }
+}
+
+const deleteSport = async (slug: string) => {
+  try {
+    const response = await fetch(`${coreUrl}/sports/${slug}/delete`, {
+      method: 'DELETE',
+      mode: 'cors',
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    });
+
+    if (!response.ok) {
+      throw new Error(`An error occurred: ${response.statusText}`)
+    }
+
+    const data = await response.json()
+    return data
+  } catch (error) {
+    console.error(error);
+  }
+}
+
+
 
 const addLike = async (slug: string) => {
   try {
@@ -63,4 +107,4 @@ const dislike = async (slug: string) => {
   }
 }
 
-export {getAllSports, addLike, dislike};
+export {getAllSports, updateSport, deleteSport, addLike, dislike };

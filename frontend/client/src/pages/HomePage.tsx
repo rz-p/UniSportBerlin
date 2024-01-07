@@ -3,10 +3,11 @@ import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
 import CardMedia from "@mui/material/CardMedia";
 import Typography from "@mui/material/Typography";
-import { CardActionArea } from "@mui/material";
+import { Button, CardActionArea, Icon } from "@mui/material";
 import { Sport } from "../common/types";
 import { getAllSports } from "../actions/SportActions";
 import LikeCounter from "../components/LikeCounter";
+import HandleDelete from "../components/DeleteButton";
 
 const label = { inputProps: { "aria-label": "Checkbox demo" } };
 
@@ -62,6 +63,9 @@ export default function HomePage() {
               </Typography>
             </CardContent>
             <LikeCounter />
+          </CardActionArea>
+          <CardActionArea>
+            <HandleDelete />
           </CardActionArea>
         </Card>
       ))}

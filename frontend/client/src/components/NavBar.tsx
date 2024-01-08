@@ -15,8 +15,9 @@ import { styled, alpha } from '@mui/material/styles';
 import InputBase from '@mui/material/InputBase';
 import SearchIcon from '@mui/icons-material/Search';
 import SportsVolleyballIcon from '@mui/icons-material/SportsVolleyball';
+import { Link } from 'react-router-dom';
 
-const pages = ['Home', 'Sport courses', 'About'];
+const pages = ['Home', 'About', 'FAQ', 'Contact'];
 const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
 
 const Search = styled('div')(({ theme }) => ({
@@ -87,8 +88,9 @@ function NavBar() {
         <Toolbar disableGutters>
           <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
             {pages.map((page) => (
-              <Button
+              <Button 
                 key={page}
+                component={Link} to={`/${page.toLowerCase()}`} 
                 onClick={handleCloseNavMenu}
                 sx={{ my: 2, color: 'white', display: 'block' }}
               >

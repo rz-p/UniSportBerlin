@@ -1,21 +1,15 @@
 import React from "react";
-import {
-  Button,
-  Modal,
-  Box,
-  Typography,
-  IconButton,
-} from "@mui/material";
+import { Button, Modal, Box, Typography, IconButton } from "@mui/material";
 import Text from "@mui/material/Typography";
 import { deleteSport } from "../actions/SportActions";
 import DeleteIcon from "@mui/icons-material/Delete";
 
 interface IProps {
-    slug: string
+  slug: string;
 }
 
 export default function DeleteButton(props: IProps) {
-const { slug } = props;
+  const { slug } = props;
   const [isModalOpen, setIsModalOpen] = React.useState(false);
 
   const deleteModal = (
@@ -53,9 +47,7 @@ const { slug } = props;
   return (
     <div>
       {deleteModal}
-      <IconButton
-        onClick={() => setIsModalOpen(true)}
-      >
+      <IconButton onClick={() => setIsModalOpen(true)}>
         <DeleteIcon />
       </IconButton>
     </div>

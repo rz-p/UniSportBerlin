@@ -44,7 +44,7 @@ const updateSport = async (slug: string) => {
 
 const deleteSport = async (slug: string) => {
   try {
-    const response = await fetch(`${coreUrl}/sports/${slug}/delete`, {
+    const response = await fetch(`${coreUrl}/sports/delete/${slug}`, {
       method: 'DELETE',
       mode: 'cors',
       headers: {

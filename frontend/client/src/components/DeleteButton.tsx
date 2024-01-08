@@ -10,7 +10,12 @@ import Text from "@mui/material/Typography";
 import { deleteSport } from "../actions/SportActions";
 import DeleteIcon from "@mui/icons-material/Delete";
 
-export default function DeleteButton() {
+interface IProps {
+    slug: string
+}
+
+export default function DeleteButton(props: IProps) {
+const { slug } = props;
   const [isModalOpen, setIsModalOpen] = React.useState(false);
 
   const deleteModal = (
@@ -35,8 +40,7 @@ export default function DeleteButton() {
         <Button
           style={{ backgroundColor: "red", margin: "10px" }}
           onClick={() => {
-            deleteSport("asd");
-
+            deleteSport(slug);
             setIsModalOpen(false);
           }}
         >

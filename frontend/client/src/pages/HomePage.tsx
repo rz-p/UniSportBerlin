@@ -92,7 +92,7 @@ export default function HomePage() {
                 </Typography>
               </CardContent>
             </CardActionArea>
-            <CardButtons />
+            <CardButtons slug={sport.slug} />
           </Card>
         ))}
       </div>

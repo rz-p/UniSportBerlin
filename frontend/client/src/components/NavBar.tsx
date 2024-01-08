@@ -14,10 +14,12 @@ import {
   InputBase,
 } from "@mui/material";
 import MenuIcon from "@mui/icons-material/Menu";
+import AddIcon from '@mui/icons-material/Add';
 import SearchIcon from "@mui/icons-material/Search";
 import SportsVolleyballIcon from "@mui/icons-material/SportsVolleyball";
 import { styled, alpha } from "@mui/material/styles";
 import { Link } from "react-router-dom";
+import AddSportForm from "./AddSportForm";
 
 const pages = ["Home", "About", "FAQ", "Contact"];
 const settings = ["Profile", "Account", "Dashboard", "Logout"];
@@ -222,6 +224,15 @@ function NavBar() {
               ))}
             </Menu>
           </Box>
+          <Button
+            style={{margin: '20px'}}
+            variant="contained"
+            color="secondary"
+            startIcon={<AddIcon />}
+            onClick={() => AddSportForm()}
+          >
+            Add Sport
+          </Button>
         </Toolbar>
       </Container>
     </AppBar>

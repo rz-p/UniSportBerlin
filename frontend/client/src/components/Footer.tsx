@@ -13,7 +13,7 @@ const footerStyle: React.CSSProperties = {
 export default function Footer() {
   return (
     <div style={footerStyle}>
-      <p style={{ margin: "10px", fontSize: "25px" }}>
+      <p style={{ margin: "2px", fontSize: "15px" }}>
         © 2024 Berlin
       </p>
     </div>

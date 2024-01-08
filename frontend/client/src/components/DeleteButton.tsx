@@ -1,42 +1,63 @@
 import React from "react";
-// import { CardActionArea, Button, Modal, Stack, Text } from "@mui/material";
-// import { deleteSport } from "../actions/SportActions";
-// import DeleteIcon from "@mui/icons-material/Delete";
+import {
+  Button,
+  Modal,
+  Box,
+  Typography,
+  IconButton,
+} from "@mui/material";
+import Text from "@mui/material/Typography";
+import { deleteSport } from "../actions/SportActions";
+import DeleteIcon from "@mui/icons-material/Delete";
 
-// export default function DeleteButton() {
-//   const [isModalOpen, setIsModalOpen] = React.useState(false);
+interface IProps {
+    slug: string
+}
 
-//   const deleteModal = (
-//     <Modal 
-//       open={isModalOpen} 
-//       onClose={() => setIsModalOpen(false)}
-//     >
-//       <Stack>
-//         <Text>
-//           Are you sure you want to delete this sport?
-//         </Text>
+export default function DeleteButton(props: IProps) {
+const { slug } = props;
+  const [isModalOpen, setIsModalOpen] = React.useState(false);
 
-//         <Text className={classes.title}>Title: {ideaData.title}</Text>
-//         <Button
-//           style={{ backgroundColor: DELETE_BUTTON_COLOR }}
-//           onClick={() => deleteSport(/* how to get the slug */)}
-//         >
-//           Yes, delete this idea
-//         </Button>
-//       </Stack>
-//     </Modal>
-//   );
+  const deleteModal = (
+    <Modal open={isModalOpen} onClose={() => setIsModalOpen(false)}>
+      <Box
+        sx={{
+          width: 600,
+          height: 100,
+          backgroundColor: "white",
+          margin: "10px",
+          float: "center",
+        }}
+      >
+        <Typography
+          id="modal-modal-title"
+          variant="h6"
+          component="h2"
+          margin={"10px"}
+        >
+          Are you sure you want to delete this sport?
+        </Typography>
+        <Button
+          style={{ backgroundColor: "red", margin: "10px" }}
+          onClick={() => {
+            deleteSport(slug);
+            setIsModalOpen(false);
+          }}
+        >
+          <Text style={{ color: "white" }}>Delete</Text>
+        </Button>
+      </Box>
+    </Modal>
+  );
 
-//   return (
-//     <CardActionArea>
-//       <Button
-//         variant="outlined"
-//         color="error"
-//         startIcon={<DeleteIcon />}
-//         onClick={() => setIsModalOpen(true)}
-//       >
-//         Delete
-//       </Button>
-//     </CardActionArea>
-//   );
-// }
+  return (
+    <div>
+      {deleteModal}
+      <IconButton
+        onClick={() => setIsModalOpen(true)}
+      >
+        <DeleteIcon />
+      </IconButton>
+    </div>
+  );
+}

@@ -15,13 +15,13 @@ export default function LikeCounter() {
   }, [clicked]);
 
   return (
-    <CardActionArea>
+    <div>
       <Checkbox
         icon={<FavoriteBorder />}
         checkedIcon={<Favorite />}
         onChange={(event) => setClicked(event.target.checked)}
       />
       {like}
-    </CardActionArea>
+    </div>
   );
 }

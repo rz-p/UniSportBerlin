@@ -6,7 +6,6 @@ export const data = [
         schedule: "23.10.-29.01, Mo, 14:30-15:45",
         details: "Yoga hilft uns über körperliche Übungen zu mehr Gelassenheit und Ruhe zu kommen. Eine der bekanntesten ist Hatha Yoga. Wenn du einen Yogakurs suchst, der Kraft, Beweglichkeit und Entspannung gleichermaßen fördert bist du hier genau richtig.",
         image: "https://cdn.pixabay.com/photo/2017/08/16/04/48/yoga-2646457_1280.jpg",
-        
     },
     {
         name: "Boxen",

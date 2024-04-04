@@ -21,6 +21,27 @@ const getAllSports = async () => {
   }
 }
 
+const getSport = async (slug: string) => {
+  try {
+      const response = await fetch(`${coreUrl}/sports/detail/${slug}`, {
+          method: 'GET',
+          mode: 'cors',
+          headers: {
+              'Content-Type': 'application/json'
+          }
+      });
+
+      if (!response.ok) {
+          throw new Error(`An error occurred: ${response.statusText}`)
+      }
+
+      const data = await response.json()
+      return data
+  } catch (error) {
+      console.error(error);
+  }
+}
+
 const updateSport = async (slug: string) => {
   try {
     const response = await fetch(`${coreUrl}/sports/${slug}/update`, {
@@ -107,4 +128,4 @@ const dislike = async (slug: string) => {
   }
 }
 
-export {getAllSports, updateSport, deleteSport, addLike, dislike };
+export {getAllSports, updateSport, deleteSport, addLike, dislike, getSport };

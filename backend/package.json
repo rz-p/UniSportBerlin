@@ -22,11 +22,11 @@
     "eslint-plugin-promise": "^6.1.1",
     "eslint-plugin-react": "^7.33.2",
     "prisma": "^5.6.0",
-    "ts-node": "^10.9.1",
+    "ts-node": "^10.9.2",
     "typescript": "^5.2.2"
   },
   "dependencies": {
-    "@prisma/client": "^5.6.0",
+    "@prisma/client": "^5.11.0",
     "cors": "^2.8.5",
     "dotenv": "^16.3.1",
     "express": "^4.18.2",

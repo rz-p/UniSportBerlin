@@ -27,5 +27,12 @@ model User {
   id     String  @id @default(auto()) @map("_id") @db.ObjectId
   email  String  @unique
   name   String?
+  password String
   sports Sport[]
+}
+
+model UserSports {
+  id     String  @id @default(auto()) @map("_id") @db.ObjectId
+  userId  String  @db.ObjectId
+  sportId   String @db.ObjectId
 }

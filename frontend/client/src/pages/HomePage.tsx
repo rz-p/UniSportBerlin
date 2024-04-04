@@ -1,34 +1,33 @@
+import React, { useEffect, useState } from "react";
 import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
 import CardMedia from "@mui/material/CardMedia";
 import Typography from "@mui/material/Typography";
 import { Box, CardActionArea, Container } from "@mui/material";
+import { Sport } from "../common/types";
+import { getAllSports } from "../actions/SportActions";
 import LikeCounter from "../components/LikeCounter";
 import DeleteButton from "../components/DeleteButton";
 import CardButtons from "../components/CardButtons";
-import HandleDelete from "../components/DeleteButton";
-import { useSports } from '../hooks/useSports';
+// import HandleDelete from "../components/DeleteButton";
+
+const label = { inputProps: { "aria-label": "Checkbox demo" } };
 
 export default function HomePage() {
-  const { sports, state, error } = useSports();
+  const [sports, setSports] = useState<Sport[]>([]);
 
-  if (state === 'loading') {
-    return (
-      <Box display="flex" justifyContent="center" alignItems="center" height="33vh">
-        <div>Loading sports...</div>
-      </Box>
-    );
-  }
+  useEffect(() => {
+    const fetchSports = async () => {
+      try {
+        const sportsData = await getAllSports();
+        setSports(sportsData);
+      } catch (error) {
+        console.error("Error fetching sports:", error);
+      }
+    };
 
-  if (state === 'error') {
-    return (
-      <Box display="flex" justifyContent="center" alignItems="center" height="33vh">
-        <Typography variant="h6" color="error">
-          Error: {error?.message}
-        </Typography>
-      </Box>
-    );
-  }
+    fetchSports();
+  }, []);
 
   return (
     <div

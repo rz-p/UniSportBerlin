@@ -3,10 +3,6 @@ const coreUrl = "http://localhost:4000";
 const getAllSports = async () => {
   try {
     const response = await fetch(`${coreUrl}/sports/all`, {
-    
-    // to test error state 
-    // const response = await fetch(`${coreUrl}/sports/all-wrong`, {
-
       method: 'GET',
       mode: 'cors',
       headers: {

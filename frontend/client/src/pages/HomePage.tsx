@@ -10,26 +10,22 @@ import {getAllSports} from "../actions/SportActions";
 import CardButtons from "../components/CardButtons";
 // import {data} from "../data";
 // import HandleDelete from "../components/DeleteButton";
-
 const label = {inputProps: {"aria-label": "Checkbox demo"}};
-
 export default function HomePage() {
-  const [sports, setSports] = useState<Sport[]>([]);
-
-  useEffect(() => {
-    const fetchSports = async () => {
-        try {
-            const sportsData = await getAllSports();
-            setSports(sportsData);
-        } catch (error) {
-            console.error("Error fetching sports:", error);
-        }
-    };
-    fetchSports();
-  }, []);
-  
-  return (
-    <div style={{display: "flex", flexDirection: "column", alignItems: "center"}}>
+    const [sports, setSports] = useState<Sport[]>([]);
+    useEffect(() => {
+        const fetchSports = async () => {
+            try {
+                const sportsData = await getAllSports();
+                setSports(sportsData);
+            } catch (error) {
+                console.error("Error fetching sports:", error);
+            }
+        };
+        fetchSports();
+    }, []);
+    return (
+        <div style={{display: "flex", flexDirection: "column", alignItems: "center"}}>
             <Container maxWidth={false} sx={{textAlign: "center", my: 3, paddingLeft: 0, paddingRight: 0}}>
                 <Typography
                     variant="h4"
@@ -41,7 +37,7 @@ export default function HomePage() {
                         fontFamily: "monospace",
                     }}>
                     UniSportBerlin: Fitness, Fun, and Beyond
-                    </Typography>
+                </Typography>
                 <Box sx={{width: "100%", overflow: "hidden", maxHeight: "300px"}}>
                     <img
                         src="https://cdn.pixabay.com/photo/2017/08/24/21/41/tartan-track-2678544_1280.jpg"
@@ -53,7 +49,7 @@ export default function HomePage() {
             <div style={{display: "flex", flexWrap: "wrap", justifyContent: "center"}}>
                 {sports.map((sport) => (
                     <Card key={sport.slug} sx={{maxWidth: 345, margin: "10px"}}>
-                        <Link to={{pathname: '/detail/'+sport.slug}} state={{id: sport.slug}}>
+                        <Link to={{pathname: '/detail/'+sport.slug}} state={{id: sport.slug}} style={{ textDecoration: 'none' }}>
                             <CardActionArea>
                                 {sport.image ? (
                                     <CardMedia sx={{height: 250}} image={sport.image}/>

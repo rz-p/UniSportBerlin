@@ -1,4 +1,5 @@
-import { Prisma, PrismaClient } from '@prisma/client'
+import {Prisma, PrismaClient} from '@prisma/client'
+
 const prisma = new PrismaClient()
 
 const sports: Prisma.SportCreateInput[] = [
@@ -54,27 +55,54 @@ const sports: Prisma.SportCreateInput[] = [
         schedule: "10.10.-27.02, Di, 17:15-18:45",
         details: "Erlernen aller grundlegenden klassischen Ballettelemente, sowie deren korrekte Ausführung. Schulung der Körperhaltung, der Musikalität und den Aufbau der erforderlichen Muskulatur.",
         participantCount: 0,
-} 
+    }
 
+]
+
+const users: Prisma.UserCreateInput[] = [
+    {
+        email: "admin@de.de",
+        name: "admin",
+        password: "admin",
+    },
 ]
 
 async function main() {
     console.log(`Start seeding ...`)
+    // for (const s of sports) {
+    //     const sport = await prisma.sport.create({
+    //         data: s,
+    //     })
+    //     console.log(`Created sport with name: ${sport.name}`)
+    // }
+    for (const u of users) {
+        const user = await prisma.user.create({
+            data: u,
+        })
+        console.log(`Created user with name: ${user.name}`)
+    }
     for (const s of sports) {
-      const sport = await prisma.sport.create({
-        data: s,
-      })
-      console.log(`Created sport with name: ${sport.name}`)
+        const existingSport = await prisma.sport.findUnique({
+            where: { slug: s.slug },
+        });
+        if (!existingSport) {
+            const sport = await prisma.sport.create({
+                data: s,
+            });
+            console.log(`Created sport with name: ${sport.name}`);
+        } else {
+            console.log(`Sport with slug: ${s.slug} already exists`);
+        }
     }
     console.log(`Seeding finished.`)
-  }
-  
+}
+
 main()
-  .then(async () => {
-    await prisma.$disconnect()
-  })
-  .catch(async (e) => {
-    console.error(e)
-    await prisma.$disconnect()
-    process.exit(1)
-  })
+    .then(async () => {
+        await prisma.$disconnect()
+    })
+    .catch(async (e) => {
+        console.error(e)
+        await prisma.$disconnect()
+        process.exit(1)
+    })

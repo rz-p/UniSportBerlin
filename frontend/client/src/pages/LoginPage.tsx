@@ -25,9 +25,10 @@ const LoginPage = () => {
             window.alert("Unknown username or password");
         }
     }
+
     return (
-        <div className="auth-wrapper">
-            <div className="auth-inner">
+        <div className="form-wrapper">
+            <div className="form-inner">
                 <form onSubmit={onSubmit}>
                     <h3>Sign In</h3>
                     <div className="mb-3">
@@ -58,4 +59,5 @@ const LoginPage = () => {
         </div>
     );
 };
+
 export default LoginPage;

@@ -21,7 +21,7 @@ import SearchIcon from "@mui/icons-material/Search";
 import SportsVolleyballIcon from "@mui/icons-material/SportsVolleyball";
 import {styled, alpha} from "@mui/material/styles";
 import {Link, useLocation} from "react-router-dom";
-import AddSportPage from "./AddSportPage";
+import AddSportPage from "../pages/AddSportPage";
 import {useEffect, useState} from "react";
 import {useAuth} from "../auth-context";
 

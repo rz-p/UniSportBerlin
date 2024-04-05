@@ -1,5 +1,7 @@
 import React, {useState} from 'react';
 import {useNavigate} from "react-router";
+import {login} from "../actions/UserActions";
+import {createSport} from "../actions/SportActions";
 
 const AddSportPage: React.FC = () => {
 
@@ -11,7 +13,6 @@ const AddSportPage: React.FC = () => {
         schedule: "",
         image: ""
     });
-
     const navigate = useNavigate();
 
     function updateForm(value: any) {
@@ -19,32 +20,28 @@ const AddSportPage: React.FC = () => {
             return {...prev, ...value};
         });
     }
-
     // This function will handle the submission.
     async function onSubmit() {
         // When a post request is sent to the create url, we'll add a new record to the database.
         const newSport = {...form};
-        await fetch("http://localhost:4000/sports/new", {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json",
-            },
-            body: JSON.stringify(newSport),
-        }).catch((error) => {
-            window.alert(error);
+        let sport = createSport(JSON.stringify(newSport)).catch((error) => {
+            window.alert(error.toString());
+            navigate("/");
             return;
         });
-        setForm({name: "", slug: "", location: "", details: "", schedule: "", image: ""});
-        navigate("/");
+        sport.then(result => {
+            navigate("/detail/" + newSport.slug);
+            setForm({name: "", slug: "", location: "", details: "", schedule: "", image: ""});
+        })
     }
 
     return (
-        <div className="form-small">
-            <form onSubmit={() => onSubmit()}>
-                <div className="form-group">
-                    <h2>Add New Sport</h2>
-                    <div className="form-group">
-                        <label htmlFor="position">Name</label>
+        <div className="form-wrapper">
+            <div className="form-inner">
+                <form onSubmit={onSubmit}>
+                    <h3>Add New Sport</h3>
+                    <div className="mb-3">
+                        <label htmlFor="name">Name</label>
                         <input
                             type="text"
                             className="form-control"
@@ -53,7 +50,16 @@ const AddSportPage: React.FC = () => {
                             onChange={(e) => updateForm({name: e.target.value})}
                         />
                     </div>
-                    <div className="form-group">
+                    <div className="mb-3">
+                        <label htmlFor="details">Details</label>
+                        <textarea
+                            className="form-control"
+                            id="details"
+                            value={form.details}
+                            onChange={(e) => updateForm({details: e.target.value})}
+                        />
+                    </div>
+                    <div className="mb-3">
                         <label htmlFor="position">Location</label>
                         <input
                             type="text"
@@ -63,17 +69,7 @@ const AddSportPage: React.FC = () => {
                             onChange={(e) => updateForm({location: e.target.value})}
                         />
                     </div>
-                    <div className="form-group">
-                        <label htmlFor="position">Details</label>
-                        <input
-                            type="text"
-                            className="form-control"
-                            id="details"
-                            value={form.details}
-                            onChange={(e) => updateForm({details: e.target.value})}
-                        />
-                    </div>
-                    <div className="form-group">
+                    <div className="mb-3">
                         <label htmlFor="position">Slug</label>
                         <input
                             type="text"
@@ -83,7 +79,7 @@ const AddSportPage: React.FC = () => {
                             onChange={(e) => updateForm({slug: e.target.value})}
                         />
                     </div>
-                    <div className="form-group">
+                    <div className="mb-3">
                         <label htmlFor="position">Schedule</label>
                         <input
                             type="text"
@@ -93,7 +89,7 @@ const AddSportPage: React.FC = () => {
                             onChange={(e) => updateForm({schedule: e.target.value})}
                         />
                     </div>
-                    <div className="form-group">
+                    <div className="mb-3">
                         <label htmlFor="position">Image</label>
                         <input
                             type="text"
@@ -103,11 +99,17 @@ const AddSportPage: React.FC = () => {
                             onChange={(e) => updateForm({image: e.target.value})}
                         />
                     </div>
-                    <button type="submit" onClick={() => onSubmit()}>Add</button>
-                </div>
-            </form>
+                    <div className="d-grid">
+                        <button className="btn btn-secondary" onClick={() => navigate("/")}>
+                            Cancel
+                        </button>
+                        <button type="submit" className="btn btn-primary mt-3">
+                            Submit
+                        </button>
+                    </div>
+                </form>
+            </div>
         </div>
     );
 };
-
 export default AddSportPage;

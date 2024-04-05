@@ -61,33 +61,23 @@ const updateSport = async (slug: string) => {
     }
 }
 
-const createSport = async (slug: string, name: string, location: string, details: string, schedule: string, image: string) => {
+const createSport = async (body: string) => {
     try {
         const response = await fetch(`${coreUrl}/sports/new`, {
-            method: 'PUT',
-            mode: 'cors',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({
-                slug: slug,
-                name: name,
-                location: location,
-                details: details,
-                schedule: schedule,
-                image: image
-            }),
+            method: 'POST',
+            headers: {'Content-Type': 'application/json'},
+            body: body,
         });
 
         if (!response.ok) {
-            throw new Error(`An error occurred: ${response.statusText}`)
+            return null
+        } else {
+            return response.json()
         }
-
-        return await response.json()
     } catch (error) {
         console.error(error);
     }
-}
+};
 
 const deleteSport = async (slug: string) => {
     try {
@@ -103,8 +93,7 @@ const deleteSport = async (slug: string) => {
             throw new Error(`An error occurred: ${response.statusText}`)
         }
 
-        const data = await response.json()
-        return data
+        return await response.json()
     } catch (error) {
         console.error(error);
     }

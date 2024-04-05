@@ -23,6 +23,7 @@ import {styled, alpha} from "@mui/material/styles";
 import {Link, useLocation} from "react-router-dom";
 import AddSportPage from "./AddSportPage";
 import {useEffect, useState} from "react";
+import {useAuth} from "../auth-context";
 
 const pages = ["Home", "About", "FAQ", "Contact"];
 const settings = ["Profile", "Account", "Dashboard", "Logout"];
@@ -66,24 +67,20 @@ const StyledInputBase = styled(InputBase)(({theme}) => ({
         },
     },
 }));
+
 function NavBar() {
+    //const { user, updateState } = useContext(AuthContext);
+    //updateState(AuthContext);
+
+    const auth = useAuth();
     const [anchorElNav, setAnchorElNav] = React.useState<null | HTMLElement>(
-        null
-    );
-    const [anchorElUser, setAnchorElUser] = React.useState<null | HTMLElement>(
         null
     );
     const handleOpenNavMenu = (event: React.MouseEvent<HTMLElement>) => {
         setAnchorElNav(event.currentTarget);
     };
-    const handleOpenUserMenu = (event: React.MouseEvent<HTMLElement>) => {
-        setAnchorElUser(event.currentTarget);
-    };
     const handleCloseNavMenu = () => {
         setAnchorElNav(null);
-    };
-    const handleCloseUserMenu = () => {
-        setAnchorElUser(null);
     };
     return (
         <AppBar position="sticky" sx={{backgroundColor: "#5D1F4C"}}>
@@ -174,10 +171,10 @@ function NavBar() {
                             letterSpacing: ".3rem",
                             color: "inherit",
                             textDecoration: "none",
-                        }}
-                    >
+                        }}>
                         UniSportBerlin
                     </Typography>
+
                     <Search>
                         <SearchIconWrapper>
                             <SearchIcon/>
@@ -187,65 +184,71 @@ function NavBar() {
                             inputProps={{"aria-label": "search"}}
                         />
                     </Search>
-                    <Box sx={{flexGrow: 0}}>
-                        <Tooltip title="Open settings">
-                            <IconButton onClick={handleOpenUserMenu} sx={{p: 0}}>
-                                <Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg"/>
-                            </IconButton>
-                        </Tooltip>
-                        <Menu
-                            sx={{mt: "45px"}}
-                            id="menu-appbar"
-                            anchorEl={anchorElUser}
-                            anchorOrigin={{
-                                vertical: "top",
-                                horizontal: "right",
-                            }}
-                            keepMounted
-                            transformOrigin={{
-                                vertical: "top",
-                                horizontal: "right",
-                            }}
-                            open={Boolean(anchorElUser)}
-                            onClose={handleCloseUserMenu}
-                        >
-                            {settings.map((setting) => (
-                                <MenuItem key={setting} onClick={handleCloseUserMenu}>
-                                    <Typography textAlign="center">{setting}</Typography>
-                                </MenuItem>
-                            ))}
-                        </Menu>
-                    </Box>
-                    <Button
+                    { auth.status == "true" ? <UserMenu /> : null }
+                    { auth.status == "true" ? <Button
                         style={{margin: '20px'}}
                         variant="contained"
                         color="secondary"
                         startIcon={<AddIcon/>}
                         component={Link} to="/add">
                         Add Sport
-                    </Button>
+                    </Button> : null }
                     <AuthButton/>
                 </Toolbar>
             </Container>
         </AppBar>
     );
 }
-function AuthButton() {
-    const [userLogged, setUserLogged] = useState(
-        JSON.parse(localStorage.getItem("userLogged") || 'false')
-    );
-    useEffect(() => {
-        localStorage.setItem("userLogged", JSON.stringify(userLogged));
-    }, [userLogged]);
-    const logOut = () => setUserLogged(false);
 
-    console.log("userLogged="+userLogged);
-    if (userLogged) {
+function UserMenu() {
+    const [anchorElUser, setAnchorElUser] = React.useState<null | HTMLElement>(
+        null
+    );
+    const handleOpenUserMenu = (event: React.MouseEvent<HTMLElement>) => {
+        setAnchorElUser(event.currentTarget);
+    };
+    const handleCloseUserMenu = () => {
+        setAnchorElUser(null);
+    };
+
+    return <Box sx={{flexGrow: 0}}>
+        <Tooltip title="Open settings">
+            <IconButton onClick={handleOpenUserMenu} sx={{p: 0}}>
+                <Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg"/>
+            </IconButton>
+        </Tooltip>
+        <Menu
+            sx={{mt: "45px"}}
+            id="menu-appbar"
+            anchorEl={anchorElUser}
+            anchorOrigin={{
+                vertical: "top",
+                horizontal: "right",
+            }}
+            keepMounted
+            transformOrigin={{
+                vertical: "top",
+                horizontal: "right",
+            }}
+            open={Boolean(anchorElUser)}
+            onClose={handleCloseUserMenu}>
+            {settings.map((setting) => (
+                <MenuItem key={setting} onClick={handleCloseUserMenu}>
+                    <Typography textAlign="center">{setting}</Typography>
+                </MenuItem>
+            ))}
+        </Menu>
+    </Box>;
+}
+
+function AuthButton() {
+    const auth = useAuth();
+    if (auth.status == "true") {
         return <Button
             style={{margin: '20px'}}
             variant="contained"
             color="secondary"
-            onClick={() => logOut()}
+            onClick={() => auth.logOut()}
             startIcon={<LogoutIcon/>}>
             Logout
         </Button>;

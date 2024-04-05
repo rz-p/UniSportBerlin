@@ -34,7 +34,7 @@ const DetailsPage: React.FC = () => {
             <Card key={sport.slug} sx={{margin: "10px"}}>
                 <CardActionArea>
                     {sport.image ? (
-                        <CardMedia sx={{height: 250}} image={sport.image}/>
+                        <CardMedia sx={{height: 500}} image={sport.image}/>
                     ) : (
                         <div
                             style={{

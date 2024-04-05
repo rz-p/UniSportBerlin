@@ -2,15 +2,14 @@ import {Render, Provider, Container, useStore, ContainerProps} from 'react-login
 import {useNavigate} from "react-router";
 import {useState} from "react";
 import {login} from "../actions/UserActions";
+import {useAuth} from "../auth-context";
 
 const LoginPage = () => {
+    const auth = useAuth();
     const [name, setName] = useState("");
     const [password, setPassword] = useState("");
 
     const navigate = useNavigate();
-    const logIn = () => {
-        localStorage.setItem("userLogged", JSON.stringify(true));
-    };
 
     // This function will handle the submission.
     async function onSubmit(e: any) {
@@ -20,13 +19,12 @@ const LoginPage = () => {
             return;
         });
         if (user!=null) {
-            logIn();
+            auth.loginAction();
             navigate("/");
         } else {
             window.alert("Unknown username or password");
         }
     }
-
     return (
         <div className="auth-wrapper">
             <div className="auth-inner">
@@ -60,5 +58,4 @@ const LoginPage = () => {
         </div>
     );
 };
-
 export default LoginPage;

@@ -20,8 +20,10 @@ const AddSportPage: React.FC = () => {
             return {...prev, ...value};
         });
     }
+
     // This function will handle the submission.
-    async function onSubmit() {
+    async function onSubmit(e: any) {
+        e.preventDefault();
         // When a post request is sent to the create url, we'll add a new record to the database.
         const newSport = {...form};
         let sport = createSport(JSON.stringify(newSport)).catch((error) => {
@@ -31,7 +33,7 @@ const AddSportPage: React.FC = () => {
         });
         sport.then(result => {
             navigate("/detail/" + newSport.slug);
-            setForm({name: "", slug: "", location: "", details: "", schedule: "", image: ""});
+
         })
     }
 
@@ -112,4 +114,5 @@ const AddSportPage: React.FC = () => {
         </div>
     );
 };
+
 export default AddSportPage;

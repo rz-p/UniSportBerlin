@@ -8,9 +8,7 @@ import {Sport} from "../common/types";
 import {Link} from "react-router-dom";
 import {getAllSports} from "../actions/SportActions";
 import CardButtons from "../components/CardButtons";
-// import {data} from "../data";
-// import HandleDelete from "../components/DeleteButton";
-const label = {inputProps: {"aria-label": "Checkbox demo"}};
+
 export default function HomePage() {
     const [sports, setSports] = useState<Sport[]>([]);
     useEffect(() => {
@@ -25,7 +23,7 @@ export default function HomePage() {
         fetchSports();
     }, []);
     return (
-        <div style={{display: "flex", flexDirection: "column", alignItems: "center"}}>
+        <div style={{display: "flex", flexDirection: "column", alignItems: "center", paddingBottom: "70px"}}>
             <Container maxWidth={false} sx={{textAlign: "center", my: 3, paddingLeft: 0, paddingRight: 0}}>
                 <Typography
                     variant="h4"
@@ -48,9 +46,8 @@ export default function HomePage() {
             </Container>
             <div style={{display: "flex", flexWrap: "wrap", justifyContent: "center"}}>
                 {sports.map((sport) => (
-                    <Card key={sport.slug} sx={{maxWidth: 345, margin: "10px"}}>
-                        <Link to={{pathname: '/detail/'+sport.slug}} state={{id: sport.slug}} style={{ textDecoration: 'none' }}>
-                            <CardActionArea>
+                    <Card key={sport.slug} sx={{minWidth: 300, maxWidth: 345, margin: "10px"}}>
+                            <CardActionArea component={Link} to={"/detail/"+sport.slug}>
                                 {sport.image ? (
                                     <CardMedia sx={{height: 250}} image={sport.image}/>
                                 ) : (
@@ -79,7 +76,7 @@ export default function HomePage() {
                                     </Typography>
                                 </CardContent>
                             </CardActionArea>
-                        </Link>
+                            
                         <CardButtons slug={sport.slug}/>
                     </Card>
                 ))}

@@ -10,6 +10,7 @@ import {BrowserRouter, Routes, Route} from 'react-router-dom';
 import DetailsPage from "./pages/DetailsPage";
 import Login from "./pages/LoginPage";
 import AddSportPage from "./pages/AddSportPage";
+import ErrorPage from "./pages/ErrorPage";
 
 export default function App() {
     return (
@@ -24,6 +25,7 @@ export default function App() {
                 <Route path="/detail/:id" element={<DetailsPage/>}/>
                 <Route path="/edit/:id" element={<EditDetailsPage/>}/>
                 <Route path="/add" element={<AddSportPage/>}/>
+                <Route path="*" element={<ErrorPage/>}/>
             </Routes>
             <Footer/>
         </BrowserRouter>

@@ -3,19 +3,20 @@ import DeleteButton from "./DeleteButton";
 import LikeCounter from "./LikeCounter";
 import * as React from "react";
 import EditButton from "./EditButton";
+import {useAuth} from "../auth-context";
 
 interface IProps {
     slug: string;
 }
 
 export default function CardButtons(props: IProps) {
-    const isUserLoggedIn = JSON.parse(localStorage.getItem("userLogged") || 'false');
+    const auth = useAuth();
     const {slug} = props;
     return (
         <CardActions disableSpacing>
             <LikeCounter/>
-            {isUserLoggedIn ? <DeleteButton slug={slug}/> : null}
-            {isUserLoggedIn ? <EditButton slug={slug}/> : null}
+            {auth.status == "true" ? <DeleteButton slug={slug}/> : null}
+            {auth.status == "true" ? <EditButton slug={slug}/> : null}
         </CardActions>
     );
 }

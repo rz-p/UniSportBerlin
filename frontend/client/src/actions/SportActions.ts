@@ -40,22 +40,23 @@ const getSport = async (slug: string) => {
     }
 }
 
-const updateSport = async (slug: string) => {
+const updateSport = async (slug: string, body: string) => {
     try {
         const response = await fetch(`${coreUrl}/sports/${slug}/update`, {
             method: 'PUT',
             mode: 'cors',
+            body: body,
             headers: {
                 'Content-Type': 'application/json'
             }
         });
 
         if (!response.ok) {
-            throw new Error(`An error occurred: ${response.statusText}`)
+            return null
+        } else {
+            return response.json()
         }
-
-        const data = await response.json()
-        return data
+        return await response.json()
     } catch (error) {
         console.error(error);
     }

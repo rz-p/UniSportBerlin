@@ -22,6 +22,7 @@
     "outDir": "dist"
   },
   "include": [
-    "src"
+    "src",
+    "src/components/pages/AddSportPage.tsx"
   ]
 }

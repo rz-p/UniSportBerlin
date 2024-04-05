@@ -7,70 +7,20 @@ import {
     Typography,
     Menu,
     Container,
-    Avatar,
     Button,
-    Tooltip,
     MenuItem,
-    InputBase,
 } from "@mui/material";
 import MenuIcon from "@mui/icons-material/Menu";
 import AddIcon from '@mui/icons-material/Add';
 import LogoutIcon from '@mui/icons-material/Logout';
 import LoginIcon from '@mui/icons-material/Login';
-import SearchIcon from "@mui/icons-material/Search";
 import SportsVolleyballIcon from "@mui/icons-material/SportsVolleyball";
-import {styled, alpha} from "@mui/material/styles";
-import {Link, useLocation} from "react-router-dom";
-import AddSportPage from "../pages/AddSportPage";
-import {useEffect, useState} from "react";
+import {Link} from "react-router-dom";
 import {useAuth} from "../auth-context";
 
 const pages = ["Home", "About", "FAQ", "Contact"];
-const settings = ["Profile", "Account", "Dashboard", "Logout"];
-const Search = styled("div")(({theme}) => ({
-    position: "relative",
-    borderRadius: theme.shape.borderRadius,
-    backgroundColor: alpha(theme.palette.common.white, 0.15),
-    "&:hover": {
-        backgroundColor: alpha(theme.palette.common.white, 0.25),
-    },
-    marginLeft: 0,
-    marginRight: 32,
-    width: "100%",
-    [theme.breakpoints.up("sm")]: {
-        marginLeft: theme.spacing(1),
-        width: "auto",
-    },
-}));
-const SearchIconWrapper = styled("div")(({theme}) => ({
-    padding: theme.spacing(0, 2),
-    height: "100%",
-    position: "absolute",
-    pointerEvents: "none",
-    display: "flex",
-    alignItems: "center",
-    justifyContent: "center",
-}));
-const StyledInputBase = styled(InputBase)(({theme}) => ({
-    color: "inherit",
-    "& .MuiInputBase-input": {
-        padding: theme.spacing(1, 1, 1, 0),
-        // vertical padding + font size from searchIcon
-        paddingLeft: `calc(1em + ${theme.spacing(4)})`,
-        transition: theme.transitions.create("width"),
-        width: "100%",
-        [theme.breakpoints.up("sm")]: {
-            width: "12ch",
-            "&:focus": {
-                width: "20ch",
-            },
-        },
-    },
-}));
 
 function NavBar() {
-    //const { user, updateState } = useContext(AuthContext);
-    //updateState(AuthContext);
 
     const auth = useAuth();
     const [anchorElNav, setAnchorElNav] = React.useState<null | HTMLElement>(
@@ -174,16 +124,6 @@ function NavBar() {
                         }}>
                         UniSportBerlin
                     </Typography>
-
-                    <Search>
-                        <SearchIconWrapper>
-                            <SearchIcon/>
-                        </SearchIconWrapper>
-                        <StyledInputBase
-                            placeholder="Search…"
-                            inputProps={{"aria-label": "search"}}
-                        />
-                    </Search>
                     { auth.status == "true" ? <UserMenu /> : null }
                     { auth.status == "true" ? <Button
                         style={{margin: '20px'}}
@@ -212,11 +152,6 @@ function UserMenu() {
     };
 
     return <Box sx={{flexGrow: 0}}>
-        <Tooltip title="Open settings">
-            <IconButton onClick={handleOpenUserMenu} sx={{p: 0}}>
-                <Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg"/>
-            </IconButton>
-        </Tooltip>
         <Menu
             sx={{mt: "45px"}}
             id="menu-appbar"
@@ -232,11 +167,6 @@ function UserMenu() {
             }}
             open={Boolean(anchorElUser)}
             onClose={handleCloseUserMenu}>
-            {settings.map((setting) => (
-                <MenuItem key={setting} onClick={handleCloseUserMenu}>
-                    <Typography textAlign="center">{setting}</Typography>
-                </MenuItem>
-            ))}
         </Menu>
     </Box>;
 }

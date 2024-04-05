@@ -9,7 +9,7 @@ import Footer from './components/Footer';
 import {BrowserRouter, Routes, Route} from 'react-router-dom';
 import DetailsPage from "./pages/DetailsPage";
 import Login from "./pages/LoginPage";
-import AddSportPage from "./components/AddSportPage";
+import AddSportPage from "./pages/AddSportPage";
 
 export default function App() {
     return (

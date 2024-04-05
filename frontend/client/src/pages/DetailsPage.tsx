@@ -6,17 +6,20 @@ import Typography from "@mui/material/Typography";
 import {CardActionArea} from "@mui/material";
 import {Sport} from "../common/types";
 import {getSport} from "../actions/SportActions";
-import {useLocation} from "react-router";
+import {useParams} from 'react-router';
 
 const DetailsPage: React.FC = () => {
-    let { state } = useLocation();
-    console.log("state:", state);
+    const {id} = useParams();
+    useEffect(() => {
+        console.log({id});
+    }, [id]);
+
     const [sport, setSports] = useState<Sport>();
 
     useEffect(() => {
         const fetchSport = async () => {
             try {
-                const sportsData = await getSport(state.id);
+                const sportsData = await getSport(id || "");
                 console.log("sportsData:", sportsData);
                 setSports(sportsData);
             } catch (error) {
@@ -26,10 +29,9 @@ const DetailsPage: React.FC = () => {
         fetchSport();
     }, []);
     console.log("sport:", sport);
-
     if (sport != null) {
         return (
-            <Card key={sport.slug} sx={{margin: "30px"}}>
+            <Card key={sport.slug} sx={{margin: "10px"}}>
                 <CardActionArea>
                     {sport.image ? (
                         <CardMedia sx={{height: 250}} image={sport.image}/>

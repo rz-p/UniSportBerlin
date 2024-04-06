@@ -11,6 +11,7 @@ import DetailsPage from "./pages/DetailsPage";
 import Login from "./pages/LoginPage";
 import AddSportPage from "./pages/AddSportPage";
 import ErrorPage from "./pages/ErrorPage";
+import NotAllowedPage from "./pages/NotAllowedPage";    
 
 export default function App() {
     return (
@@ -26,6 +27,7 @@ export default function App() {
                 <Route path="/edit/:id" element={<EditDetailsPage/>}/>
                 <Route path="/add" element={<AddSportPage/>}/>
                 <Route path="*" element={<ErrorPage/>}/>
+                <Route path="/error/405" element={<NotAllowedPage/>}/>
             </Routes>
             <Footer/>
         </BrowserRouter>

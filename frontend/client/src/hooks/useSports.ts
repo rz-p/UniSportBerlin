@@ -37,6 +37,7 @@ const useSports = () => {
   useEffect(() => {
     const interval = setInterval(() => {
       fetchSports();
+      console.log('Refreshing sports data...');
     }, 60000); // Refresh every 60 seconds
 
     return () => clearInterval(interval); // Cleanup interval on component unmount

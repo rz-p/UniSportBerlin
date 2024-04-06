@@ -10,23 +10,30 @@ import Text from "@mui/material/Typography";
 import {deleteSport} from "../actions/SportActions";
 import DeleteIcon from "@mui/icons-material/Delete";
 import {useNavigate} from "react-router";
+import { useAuth } from "../auth-context";
 
 interface IProps {
     slug: string
 }
 
 export default function DeleteButton(props: IProps) {
+    const auth = useAuth();
     const {slug} = props;
     const [isModalOpen, setIsModalOpen] = React.useState(false);
     const navigate = useNavigate();
 
     async function onDelete(slug: string) {
+        if (auth.status === "false") {
+            navigate("/error/405");
+            return null;
+        } else {
         deleteSport(slug).catch((error) => {
             window.alert(error);
             navigate("/");
             return;
         });
         navigate(0);
+    }
     }
 
     const deleteModal = (

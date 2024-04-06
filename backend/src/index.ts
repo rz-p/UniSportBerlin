@@ -2,6 +2,7 @@ import express from 'express'
 import cors from 'cors'
 import sportRouter from './routes/sportsRouter'
 import login from "./routes/login";
+import error405 from "./routes/error/error405";
 
 const app = express();
 const port = 4000;
@@ -18,6 +19,7 @@ app.get('/', (req, res) => {
 })
 
 app.use('/sports', sportRouter)
+app.use('/error/405', error405)
 app.use('/login', login)
 
 app.listen(port, () => {
